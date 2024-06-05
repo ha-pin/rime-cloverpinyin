@@ -19,7 +19,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install jieba pypinyin opencc
+        pip install jieba pypinyin opencc requests
     - name: Run git commands
       run: |
         git clone https://github.com/ha-pin/rime-cloverpinyin.git
