@@ -32,10 +32,10 @@ jobs:
       run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
     - name: Build schema
       run: |
-        ./build.sh
+        ./rime-cloverpinyin/build.sh
     - name: Pack schema
       run: |
-          ./pack.sh ver.${{ steps.date.outputs.date }}
+        ./rime-cloverpinyin/pack.sh ver.${{ steps.date.outputs.date }}
     - name: Upload to github pages
       uses: peaceiris/actions-gh-pages@v4
       with:
