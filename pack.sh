@@ -3,7 +3,7 @@ set -e
 
 ver="$1"
 
-cd ../data
+cd ./rime-cloverpinyin/data
 rm -rf clover.schema-$ver.zip
 rm -rf clover.schema-build-$ver.zip
 zip -5 clover.schema-$ver.zip *.yaml opencc/*

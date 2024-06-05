@@ -39,4 +39,4 @@ jobs:
     - name: Upload to github pages
       uses: peaceiris/actions-gh-pages@v4
       with:
-        publish_dir: ./data
+        publish_dir: ./rime-cloverpinyin/data
