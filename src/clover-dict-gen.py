@@ -232,9 +232,9 @@ class DictGenerator:
 
 
 def main(args):
-    #text_dict, text_phrase = generate('clover')
-    #open('clover.base.dict.yaml', 'w', encoding = 'UTF-8').write(text_dict)
-    #open('clover.phrase.dict.yaml', 'w', encoding = 'UTF-8').write(text_phrase)
+    #text_dict, text_phrase = generate('clover_hapin_arabic')
+    #open('clover_hapin_arabic.base.dict.yaml', 'w', encoding = 'UTF-8').write(text_dict)
+    #open('clover_hapin_arabic.phrase.dict.yaml', 'w', encoding = 'UTF-8').write(text_phrase)
     generator = DictGenerator()
 
     class PrintProcess:
@@ -268,8 +268,8 @@ def main(args):
         PrintProcess('正在合并符号词汇 (%s/%s)').process)
     print('成功合并符号词汇 %s 个汉字， %s 个词组。' % r)
 
-    word_dict_name = 'clover.base'
-    parse_dict_name = 'clover.phrase'
+    word_dict_name = 'clover_hapin_arabic.base'
+    parse_dict_name = 'clover_hapin_arabic.phrase'
 
     word_dict_text = """
 # Rime 字典

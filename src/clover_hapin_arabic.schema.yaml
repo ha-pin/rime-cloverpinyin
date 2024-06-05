@@ -2,18 +2,20 @@
 # encoding: utf-8
 
 schema:
-  schema_id: clover
-  name: 🍀️四叶草简体拼音
+  schema_id: clover_hapin_arabic
+  name: 🍀️四叶草简体拼音哈汉混合输入
   version: "1.0.0"
   author:
     - fkxxyz - https://www.fkxxyz.com
+    - Herbert He - https://github.com/HerbertHe
   description: |
-    由🍀️四叶草亲自定制，特点：
+    基于🍀️四叶草简体拼音输入二次定制，特点：
       1. 结合搜狗输入法的输入习惯
       2. 默认开启 emoji 表情支持
       3. 加上很多特殊符号的输入支持
       4. 繁简切换支持
       5. 许多智能纠错
+      6. 支持哈萨克语老文字输入
   dependencies:
     - emoji
 
@@ -82,16 +84,16 @@ speller:
     # 基础
     - abbrev/^([a-z]).+$/$1/
     - abbrev/^([zcs]h).+$/$1/
-    
+
     # 补全
     - derive/([dtngkhrzcs])o(u|ng)$/$1o/   # o = ou; o = ong
     - derive/ong$/on/      # on = ong
     - derive/^ding$/din/     # din = ding
-    
+
     # 处理 v 和 u
     - derive/^([nl])ue$/$1ve/   # nve = nue; lve = lue
     - derive/^([jqxy])u/$1v/    # v = u; v = u
-    
+
     # 智能纠错
     - derive/ao$/oa/       # oa = ao
     - derive/([iu])a(o|ng?)$/a$1$2/   # aio = iao; aing = iang; aung = uang
@@ -104,7 +106,7 @@ speller:
     - derive/u$/uu/      # ui = u  # u 不小心按两下
 
 translator:
-  dictionary: clover
+  dictionary: clover_hapin_arabic
   preedit_format:
     - xform/([nl])v/$1ü/
     - xform/([nl])ue/$1üe/
@@ -184,9 +186,9 @@ key_binder:
       - key_bindings:/paging_with_minus_equal  # 减号等号翻页
       - key_bindings:/paging_with_comma_period   # 逗号句号翻页
       - key_bindings:/paging_with_brackets   # 中括号翻页
-      - clover.key_bindings:/numbered_mode_switch   # Ctrl+Shift+数字 切换开关
-      - clover.key_bindings:/windows_compatible_mode_switch   # Windows 兼容
-      - clover.key_bindings:/kp_enter_is_return   # 小键盘回车设为普通回车
+      - clover_hapin_arabic.key_bindings:/numbered_mode_switch   # Ctrl+Shift+数字 切换开关
+      - clover_hapin_arabic.key_bindings:/windows_compatible_mode_switch   # Windows 兼容
+      - clover_hapin_arabic.key_bindings:/kp_enter_is_return   # 小键盘回车设为普通回车
 
 ascii_composer:
   import_preset: default
@@ -198,5 +200,3 @@ ascii_composer:
     Control_R: noop
     Caps_Lock: noop
     Eisu_toggle: clear
-
-

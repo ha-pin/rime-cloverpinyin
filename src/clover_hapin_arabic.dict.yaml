@@ -1,11 +1,11 @@
 
-name: clover
+name: clover_hapin_arabic
 version: "1"
 sort: by_weight
 
 import_tables:
-  - clover.base
-  - clover.phrase
+  - clover_hapin_arabic.base
+  - clover_hapin_arabic.phrase
   - THUOCL_animal
   - THUOCL_caijing
   - THUOCL_car
