@@ -18,4 +18,7 @@ import_tables:
   - THUOCL_medical
   - THUOCL_poem
   - sogou_new_words
+  - hapin_arabic_basic
+  - hapin_arabic_basic_3000.extend
+  - hapin_emoji
 
