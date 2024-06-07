@@ -1,12 +1,11 @@
+
 ---
-name:hapin_emoji
-version:"1.0"
-sort:by_weight
-use_preset_vocabulary:false
+name: hapin_emoji
+version: "1"
+sort: by_weight
+use_preset_vocabulary: false
 ...
 
-# Hapin Emoji
-# 手势
 👋	usalyem
 👋	usxalyem
 👌	uye
@@ -49,7 +48,6 @@ use_preset_vocabulary:false
 💛	ujurek
 💚	ujurek
 💯	ujuz
-# 水果
 🍉	udarbez
 🍈	uhawen
 🍇	uuzem
@@ -66,7 +64,6 @@ use_preset_vocabulary:false
 🍒	ushie
 🍅	uhezanah
 🥥	ukokos
-# 蔬菜
 🥔	ukartop
 🥕	usxabez
 🥕	usabez
@@ -77,7 +74,6 @@ use_preset_vocabulary:false
 🧅	upiaz
 🍄	usangerawhulah
 🥜	ujyerjangghaghe
-# 熟食
 🍞	ubolka
 🥩	uyet
 🧈	usaremai
@@ -95,19 +91,16 @@ use_preset_vocabulary:false
 🍫	uchokelat
 🍬	ukanet
 🍯	ubal
-# 饮料
 🥛	usut
 🍺	usera
 🍻	uarah
 🍷	uhezelarah
 ☕	uchai
-# 餐具
 🥢	usahpe
 🥄	uhalah
 🥄	uhaseh
 🔪	upeshah
 🍴	ushanshhe
-# 动物
 🐴	uat
 🐎	uat
 🦄	uat
@@ -202,7 +195,6 @@ use_preset_vocabulary:false
 ☘	ushop
 🍀	ushxop
 🍀	ushop
-# 地点和时间
 🌏	ujershar
 🗺	uharita
 🧭	ukompas
@@ -252,7 +244,6 @@ use_preset_vocabulary:false
 🌨	uhar
 🌩	ujxai
 🌩	ujai
-#活动
 🎄	uaghash
 🎉	ulyenta
 🎁	utartu
@@ -269,7 +260,6 @@ use_preset_vocabulary:false
 ⚽	ufwtbol
 🥊	uholhap
 🧿	utumar
-#物品
 👓	ukuzxainyek
 👓	ukuzainyek
 👞	uaiah
@@ -314,6 +304,5 @@ use_preset_vocabulary:false
 🪑	uorndeh
 🧷	utuiryewesh
 🚬	utyemyeke
-#国旗
 🇨🇳	ucn
 🇰🇿	ukz
