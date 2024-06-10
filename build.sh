@@ -33,16 +33,14 @@ cp ../src/sogou_new_words.dict.yaml .
 
 # 生成 data 目录
 mkdir -p ../data
-cp ../src/*.yaml ../data
-cd ../data
 
 # 根据不同类型生成不同目录，分开打包
 mkdir -p ../data/hapin_arabic
-cp clover_hapin_arabic.*.yaml clover_hapin.*.yaml hapin_arabic_*.*.yaml hapin_emoji.dict.yaml THUOCL_*.yaml sogou_new_words.dict.yaml ../data/hapin_arabic
+cp ../src/clover_hapin_arabic.*.yaml ../src/clover_hapin.*.yaml ../src/hapin_arabic_*.*.yaml ../src/hapin_emoji.dict.yaml THUOCL_*.yaml ../src/sogou_new_words.dict.yaml ../data/hapin_arabic
 mkdir -p ../data/hapin_cyrillic
-cp clover_hapin_cyrillic.*.yaml clover_hapin.*.yaml hapin_cyrillic_*.*.yaml hapin_emoji.dict.yaml THUOCL_*.yaml sogou_new_words.dict.yaml ../data/hapin_cyrillic
+cp ../src/clover_hapin_cyrillic.*.yaml ../src/clover_hapin.*.yaml ../src/hapin_cyrillic_*.*.yaml ../src/hapin_emoji.dict.yaml THUOCL_*.yaml ../src/sogou_new_words.dict.yaml ../data/hapin_cyrillic
 mkdir -p ../data/hapin_mixed_arabic_cyrillic
-cp clover_hapin_mixed_arabic_cyrillic.*.yaml clover_hapin.*.yaml hapin_mixed_cyrillic_*.*.yaml hapin_emoji.dict.yaml THUOCL_*.yaml sogou_new_words.dict.yaml ../data/hapin_mixed_arabic_cyrillic
+cp ../src/clover_hapin_mixed_arabic_cyrillic.*.yaml ../src/clover_hapin.*.yaml ../src/hapin_mixed_cyrillic_*.*.yaml ../src/hapin_emoji.dict.yaml THUOCL_*.yaml ../src/sogou_new_words.dict.yaml ../data/hapin_mixed_arabic_cyrillic
 
 # 生成 opencc 目录
 cd ../data
