@@ -3,6 +3,8 @@ set -e
 
 ver="$1"
 
+ls ./rime-cloverpinyin/data
+
 cd ./rime-cloverpinyin/data/hapin_arabic
 rm -rf clover_hapin_arabic.schema-$ver.zip
 # rm -rf clover_hapin_arabic.schema-build-$ver.zip
