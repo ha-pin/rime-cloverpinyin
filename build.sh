@@ -38,17 +38,14 @@ mkdir -p ../data
 echo "生成 hapin_arabic"
 mkdir -p ../data/hapin_arabic
 cp ../src/clover_hapin_arabic.*.yaml ../src/clover_hapin.*.yaml ../src/hapin_arabic_*.*.yaml ../src/hapin_emoji.dict.yaml THUOCL_*.yaml ../src/sogou_new_words.dict.yaml ../data/hapin_arabic
-ls ../data/hapin_arabic
 
 echo "生成 hapin_cyrillic"
 mkdir -p ../data/hapin_cyrillic
 cp ../src/clover_hapin_cyrillic.*.yaml ../src/clover_hapin.*.yaml ../src/hapin_cyrillic_*.*.yaml ../src/hapin_emoji.dict.yaml THUOCL_*.yaml ../src/sogou_new_words.dict.yaml ../data/hapin_cyrillic
-ls ../data/hapin_cyrillic
 
 echo "生成 hapin_mixed_arabic_cyrillic"
 mkdir -p ../data/hapin_mixed_arabic_cyrillic
 cp ../src/clover_hapin_mixed_arabic_cyrillic.*.yaml ../src/clover_hapin.*.yaml ../src/hapin_mixed_cyrillic_*.*.yaml ../src/hapin_emoji.dict.yaml THUOCL_*.yaml ../src/sogou_new_words.dict.yaml ../data/hapin_mixed_arabic_cyrillic
-ls ../data/hapin_mixed_arabic_cyrillic
 
 # 生成 opencc 目录
 cd ../data
