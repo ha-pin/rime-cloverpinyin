@@ -34,6 +34,7 @@ cp ../src/sogou_new_words.dict.yaml .
 # 生成 data 目录
 mkdir -p ../data
 cp ../src/*.yaml ../data
+cd ../data
 
 # 根据不同类型生成不同目录，分开打包
 mkdir -p ../data/hapin_arabic
