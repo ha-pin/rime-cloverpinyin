@@ -2,8 +2,8 @@
 # encoding: utf-8
 
 schema:
-  schema_id: clover_hapin_arabic
-  name: 🍀️四叶草哈汉老文字混合输入
+  schema_id: clover_hapin_mixed_arabic_cyrillic
+  name: 🍀️四叶草哈汉混合输入
   version: "1.0.0"
   author:
     - fkxxyz - https://www.fkxxyz.com
@@ -15,7 +15,7 @@ schema:
       3. 加上很多特殊符号的输入支持
       4. 繁简切换支持
       5. 许多智能纠错
-      6. 支持哈萨克语老文字输入
+      6. 支持哈萨克语老文字和西里尔文字输入
   dependencies:
     - emoji
 
@@ -106,7 +106,7 @@ speller:
     # - derive/u$/uu/      # ui = u  # u 不小心按两下
 
 translator:
-  dictionary: clover_hapin_arabic
+  dictionary: clover_hapin_mixed_arabic_cyrillic
   preedit_format:
     - xform/([nl])v/$1ü/
     - xform/([nl])ue/$1üe/
