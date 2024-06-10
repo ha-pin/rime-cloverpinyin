@@ -11,7 +11,7 @@ zip -5 clover_hapin_arabic.schema-$ver.zip *.yaml ../opencc/*
 
 cd ./rime-cloverpinyin/data/hapin_cyrillic
 rm -rf clover_hapin_cyrillic.schema-$ver.zip
-rm -rf clover_hapin_cyrillic.schema-build-$ver.zip
+# rm -rf clover_hapin_cyrillic.schema-build-$ver.zip
 zip -5 clover_hapin_cyrillic.schema-$ver.zip *.yaml ../opencc/*
 # zip -5 clover_hapin_cyrillic.schema-build-$ver.zip *.yaml ../opencc/* ../build/*
 
