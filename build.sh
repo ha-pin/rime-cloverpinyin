@@ -55,7 +55,7 @@ cp ../cache/opencc/* opencc
 
 mkdir -p ../data/hapin_arabic/opencc
 mkdir -p ../data/hapin_cyrillic/opencc
-mkdir -p ../data/hapin_mixed_arabic/cyrillic_opencc
+mkdir -p ../data/hapin_mixed_arabic_cyrillic/opencc
 
 cp opencc/* ../data/hapin_arabic/opencc
 cp opencc/* ../data/hapin_cyrillic/opencc
