@@ -1,6 +1,3 @@
-[submodule "chinese-dictionary-3.6million"]
-	path = chinese-dictionary-3.6million
-	url = https://github.com/fkxxyz/chinese-dictionary-3.6million.git
 [submodule "rime-essay"]
 	path = rime-essay
 	url = https://github.com/rime/rime-essay.git
