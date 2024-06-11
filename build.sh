@@ -53,6 +53,14 @@ mkdir -p opencc
 cp ../rime-emoji/opencc/* opencc
 cp ../cache/opencc/* opencc
 
+mkdir -p ../data/hapin_arabic/opencc
+mkdir -p ../data/hapin_cyrillic/opencc
+mkdir -p ../data/hapin_mixed_arabic/cyrillic_opencc
+
+cp opencc/* ../data/hapin_arabic/opencc
+cp opencc/* ../data/hapin_cyrillic/opencc
+cp opencc/* ../data/hapin_mixed_arabic_cyrillic/opencc
+
 # echo "开始构建部署二进制"
 # rime_deployer --compile clover.schema.yaml . /usr/share/rime-data
 rm -rf build/*.txt || true
