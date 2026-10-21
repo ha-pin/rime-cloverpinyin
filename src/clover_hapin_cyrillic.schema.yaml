@@ -4,7 +4,7 @@
 schema:
   schema_id: clover_hapin_cyrillic
   name: 🍀️四叶草哈汉西里尔混合输入
-  version: "1.0.0"
+  version: "2"
   author:
     - fkxxyz - https://www.fkxxyz.com
     - Herbert He - https://github.com/HerbertHe
@@ -16,8 +16,6 @@ schema:
       4. 繁简切换支持
       5. 许多智能纠错
       6. 支持哈萨克语西里尔输入
-  dependencies:
-    - emoji
 
 switches:
   - name: zh_simp_s2t

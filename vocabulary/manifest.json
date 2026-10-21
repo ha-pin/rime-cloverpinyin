@@ -1,0 +1,17 @@
+{
+  "kazakh_arabic.txt": {
+    "source_file": "哈萨克语_阿拉伯字母.txt",
+    "entries": 58632,
+    "sha256": "733db68f8f57b08ae235baf5c8ceadef2aa57ed6d04792c0db9b4003cd61edd5"
+  },
+  "kazakh_cyrillic.txt": {
+    "source_file": "哈萨克语_西里尔字母.txt",
+    "entries": 8953,
+    "sha256": "67dbfd034f031f870dab780a2eca514d7ac68b13bc5a7a3ea19168210bfa1d9b"
+  },
+  "kyrgyz_arabic.txt": {
+    "source_file": "柯尔克孜语_阿拉伯字母.txt",
+    "entries": 76599,
+    "sha256": "f4c3d7b06151bcc47952c48395622c1a73c53b4efb7a88444feb803ce401544e"
+  }
+}

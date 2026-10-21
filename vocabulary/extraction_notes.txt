@@ -1,0 +1,14 @@
+来源：Kazakhsha Kirgizwshi Android 3.66.0 内置词库。
+格式：UTF-8，无 BOM，每个词条一行，以 LF（\n）换行，无标题行，无词频。
+已去除纯标点项，按文件内原始词条保留字形并去重。
+
+哈萨克语_阿拉伯字母.txt：58,632 条
+哈萨克语_西里尔字母.txt：8,953 条
+哈萨克语_拉丁字母.txt：45,073 条
+柯尔克孜语_阿拉伯字母.txt：76,599 条
+
+维吾尔语：本 APK 中未发现独立的维吾尔语词库，因此没有生成维吾尔语词库文件。
+注意：assets/uyghur.png 的名称是程序沿用的内部标识，ConvertDictUtils 将它映射为 china_hayu（中国哈语），实际词条属于阿拉伯字母哈萨克语，不能当作维吾尔语导出。
+assets/kg.png 对应 ke_er_ke_zi（柯尔克孜语）；latin.png 对应 china_cyrillic；kzlatin2.png 对应 kazakhstan_latin。
+
+范围：仅为此版本安装包内置词库，不含云端及用户个人词库。

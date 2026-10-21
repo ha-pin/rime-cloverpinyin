@@ -5,6 +5,10 @@ import jieba
 import pypinyin
 import opencc
 
+from pathlib import Path
+
+RULES_VERSION = (Path(__file__).resolve().parents[1] / "VERSION").read_text(encoding="utf-8").strip()
+
 import argparse
 import os
 import sys
@@ -288,10 +292,10 @@ def main(args):
 
 ---
 name: %s
-version: "1.0.0"
+version: "%s"
 sort: by_weight
 ...
-""" % word_dict_name + generator.getWordDictText()
+""" % (word_dict_name, RULES_VERSION) + generator.getWordDictText()
 
     parse_dict_text = """
 # Rime 字典
@@ -310,10 +314,10 @@ sort: by_weight
 
 ---
 name: %s
-version: "1.0.0"
+version: "%s"
 sort: by_weight
 ...
-""" % parse_dict_name + generator.getParseDictText(
+""" % (parse_dict_name, RULES_VERSION) + generator.getParseDictText(
         10000,
         PrintProcess('正在取得每个词组的拼音 (%s/%s)').process)
 

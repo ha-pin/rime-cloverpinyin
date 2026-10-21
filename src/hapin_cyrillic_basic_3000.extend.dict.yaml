@@ -1,7 +1,7 @@
 
 ---
 name: hapin_cyrillic_basic_3000.extend
-version: "1"
+version: "2"
 sort: by_weight
 use_preset_vocabulary: false
 ...

@@ -44,26 +44,58 @@
 
 ## 安装
 
-安装说明已迁移到本项目的 wiki，详见：
+### 仓输入法（iOS / Hamster）
 
-[安装说明](https://github.com/fkxxyz/rime-cloverpinyin/wiki/Home)
+请导入构建后的 `data/*.zip`，不要直接导入 GitHub 的源码 ZIP 或单独复制 `src/`。
+源码不包含生成的中文基础词库和 OpenCC 资源，不能直接部署。
 
-- [在 Windows 下使用](https://github.com/fkxxyz/rime-cloverpinyin/wiki/windows)
-- [在 Linux 下使用](https://github.com/fkxxyz/rime-cloverpinyin/wiki/linux)
+三个安装包分别为：
+
+| 包名前缀 | 方案 | 哈萨克语编码 |
+| --- | --- | --- |
+| `clover_hapin_arabic.schema-` | 哈汉老文字混合输入 | `u` 前缀 |
+| `clover_hapin_cyrillic.schema-` | 哈汉西里尔混合输入 | `u` 前缀 |
+| `clover_hapin_mixed_arabic_cyrillic.schema-` | 哈汉双文字混合输入 | 老文字 `u`、西里尔 `v` 前缀 |
+
+1. 将需要的 ZIP 发送到 iPhone，通过分享菜单选择仓输入法导入。
+2. 打开仓，重新部署，并在输入方案设置中启用对应的四叶草方案。
+3. 测试中文 `nihao` 和哈萨克语 `usalyem`；双文字方案还可以测试 `vsalyem`。
+
+也可以解压后把文件放到仓的 `Rime` 目录：`*.schema.yaml` 和 `*.dict.yaml`
+必须直接位于该目录，`opencc/` 保留子目录，不能再套一层项目文件夹。
+如果已开启仓的 iCloud 同步，需要同时更新 iCloud 对应的方案目录，
+否则重新部署时可能被旧文件覆盖。
+
+如果导入后仍不能使用，请在仓中查看部署日志，搜索 `Error`、`failed`、
+`clover_hapin` 或 `dictionary`，记录第一处错误及其前后内容。
+
+参考：[仓官方安装说明](https://github.com/imfuxiao/Hamster/wiki)。
+桌面端也可参考上游的 [Windows](https://github.com/fkxxyz/rime-cloverpinyin/wiki/windows)
+和 [Linux](https://github.com/fkxxyz/rime-cloverpinyin/wiki/linux) 安装说明。
 
 ## 从本仓库源码构建
 
-一般情况下，我在发布页提供的是已经生成好的词库和部署好的二进制文件，直接使用即可。
+项目已收录桌面的哈萨克语阿拉伯文字、西里尔文字及柯尔克孜语阿拉伯文字词表。
+柯尔克孜语并入老文字哈萨克语词库，沿用 `u` 编码，不增加独立前缀。
+词表来源、合并统计及编码规则见 [vocabulary/README.md](vocabulary/README.md)。
+
+本项目生成可由 Rime 客户端部署的词库源码安装包，不包含跨平台通用的预编译二进制词库。
 
 如果你想自己从零开始构建，或者想为别的 linux 发行版打包，那么继续往下看。
 
 该仓库的内容只包含构建四叶草输入法方案的脚本，构建需要以下环境
 
-操作系统： linux
+操作系统：Linux 或 macOS
 
 python版本： 3
 
-python依赖的库： [jieba](https://github.com/fxsjy/jieba)、[pypinyin](https://github.com/mozillazg/python-pinyin)、[opencc](https://github.com/BYVoid/OpenCC)、requests
+Python 依赖统一列在 `requirements.txt` 中，建议使用虚拟环境：
+
+```shell
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+```
 
 如果是 archlinux 用户，可用下面命令快速安装这些依赖
 
@@ -75,18 +107,16 @@ pacman -S python-jieba pypinyin opencc python-requests
 
 解压工具（三者任意一个均可）： [unzip](https://www.info-zip.org/UnZip.html)、[bsdtar](https://libarchive.org/)、[7z](http://p7zip.sourceforge.net/)
 
-rime基础库： [librime](https://github.com/rime/librime)
+部署编译验证所需的基础库： [librime](https://github.com/rime/librime)（生成源码安装包不需要本机安装）
 
-rime基础配置： [librime-prelude](https://github.com/rime/rime-prelude)
+部署时由输入法提供的基础配置： [librime-prelude](https://github.com/rime/rime-prelude)
 
-克隆此仓库，并下载所有 submodule、拉取字典的 lfs 对象
+克隆此仓库，并下载所有 submodule（360 万词典已随源码提供）
 
 ```shell
-git clone https://github.com/fkxxyz/rime-cloverpinyin.git
+git clone https://github.com/ha-pin/rime-cloverpinyin.git
 cd rime-cloverpinyin
 git submodule update --init
-git -C chinese-dictionary-3.6million lfs install
-git -C chinese-dictionary-3.6million lfs pull
 ```
 
 然后直接执行构建即可
@@ -116,7 +146,13 @@ minfreq 代表360万词里面指定的最小词频，频率低于该值的词语
 ./pack.sh [ver]
 ```
 
-ver 表示版本号，例如 1.1.2
+当前规则版本为 `2`，由根目录 `VERSION` 文件记录。打包时使用 `./pack.sh 2`。两个脚本均可从任意工作目录执行。
+构建与打包都会自动检查三个方案的词典名称、导入文件及 OpenCC 资源。
+也可单独运行 `python3 scripts/validate_packages.py data`。
+GitHub Actions 会使用 librime 实际编译三个方案，并上传 ZIP 构建产物。
+推送与 `VERSION` 对应的 `v2` 标签，或手动运行 Build and Release Schema workflow，
+会将三个 `*.schema-2.zip` 安装包发布到 GitHub Release。普通分支提交与 PR 运行构建校验。
+Release 说明来自 `RELEASE_NOTES.md`，发布前请同步更新版本文件、方案及词典版本。
 
 ---
 

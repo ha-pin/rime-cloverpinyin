@@ -1,41 +1,85 @@
-name: Build Schema
+name: Build and Release Schema
 
 on:
   push:
-    branches:
-      - master
+    branches: [master]
+    tags: ['v*']
   pull_request:
-    branches:
-      - master
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: schema-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: true
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.9'
+        python-version: '3.11'
+    - name: Read rules version
+      id: version
+      shell: bash
+      run: |
+        version="$(cat VERSION)"
+        [[ "$version" =~ ^[0-9]+$ ]] || { echo "Invalid rules version: $version" >&2; exit 1; }
+        if [[ "$GITHUB_REF_TYPE" == "tag" && "$GITHUB_REF_NAME" != "v$version" ]]; then
+          echo "Tag $GITHUB_REF_NAME does not match VERSION ($version)" >&2
+          exit 1
+        fi
+        echo "number=$version" >> "$GITHUB_OUTPUT"
+        echo "tag=v$version" >> "$GITHUB_OUTPUT"
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install jieba pypinyin opencc requests
-    - name: Run git commands
-      run: |
-        git clone https://github.com/ha-pin/rime-cloverpinyin.git
-        cd rime-cloverpinyin
-        git submodule update --init
-    - name: Get current date
-      id: date
-      run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+        sudo apt-get update
+        sudo apt-get install -y librime-bin librime-data
+        python -m pip install -r requirements.txt
+    - name: Test vocabulary import
+      run: python -m unittest discover -s scripts -p 'test_*.py' -v
     - name: Build schema
+      run: ./build.sh
+    - name: Compile with librime
       run: |
-        ./rime-cloverpinyin/build.sh
+        for variant in hapin_arabic hapin_cyrillic hapin_mixed_arabic_cyrillic; do
+          (cd "data/$variant" && rime_deployer --compile "clover_${variant}.schema.yaml" . /usr/share/rime-data)
+          test -s "data/$variant/build/clover_${variant}.table.bin"
+          test -s "data/$variant/build/clover_${variant}.prism.bin"
+        done
     - name: Pack schema
-      run: |
-        ./rime-cloverpinyin/pack.sh ver.${{ steps.date.outputs.date }}
-    - name: Upload to github pages
-      uses: peaceiris/actions-gh-pages@v4
+      env:
+        RULES_VERSION: ${{ steps.version.outputs.number }}
+      run: ./pack.sh "$RULES_VERSION"
+    - name: Upload packages
+      uses: actions/upload-artifact@v4
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./rime-cloverpinyin/data
+        name: hapin-schemas-v${{ steps.version.outputs.number }}
+        path: data/*.schema-${{ steps.version.outputs.number }}.zip
+        if-no-files-found: error
+    - name: Publish GitHub Release
+      if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch'
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GH_REPO: ${{ github.repository }}
+        RELEASE_TAG: ${{ steps.version.outputs.tag }}
+        RULES_VERSION: ${{ steps.version.outputs.number }}
+      shell: bash
+      run: |
+        assets=(data/*.schema-"$RULES_VERSION".zip)
+        [[ "${#assets[@]}" == 3 ]] || { echo "Expected three schema packages" >&2; exit 1; }
+        if gh release view "$RELEASE_TAG" > /dev/null 2>&1; then
+          gh release upload "$RELEASE_TAG" "${assets[@]}" --clobber
+        else
+          gh release create "$RELEASE_TAG" "${assets[@]}" \
+            --target "$GITHUB_SHA" \
+            --title "四叶草哈汉混合输入规则 $RELEASE_TAG" \
+            --notes-file RELEASE_NOTES.md
+        fi

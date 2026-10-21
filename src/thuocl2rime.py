@@ -4,6 +4,10 @@
 
 import pypinyin
 
+from pathlib import Path
+
+RULES_VERSION = (Path(__file__).resolve().parents[1] / "VERSION").read_text(encoding="utf-8").strip()
+
 import argparse
 import os
 import sys
@@ -29,11 +33,11 @@ def main(args):
     name = args.dest[args.dest.rfind(os.sep)+1:][:-10]
 
     result = """name: %s
-version: "1"
+version: "%s"
 sort: by_weight
 
 ...
-""" % name
+""" % (name, RULES_VERSION)
 
     # 检查每个字都为合法汉字的字符串
     def checkPhrase(phrase):

@@ -1,11 +1,11 @@
 
-name: clover_hapin_arabic
-version: "1"
+name: clover_hapin_cyrillic
+version: "2"
 sort: by_weight
 
 import_tables:
-  - clover_hapin_arabic.base
-  - clover_hapin_arabic.phrase
+  - clover_hapin.base
+  - clover_hapin.phrase
   - THUOCL_animal
   - THUOCL_caijing
   - THUOCL_car
@@ -21,4 +21,5 @@ import_tables:
   - hapin_cyrillic_basic
   - hapin_cyrillic_basic_3000.extend
   - hapin_emoji
-
+  - hapin_cyrillic_desktop
+...
