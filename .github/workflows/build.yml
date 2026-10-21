@@ -58,11 +58,13 @@ jobs:
       env:
         RULES_VERSION: ${{ steps.version.outputs.number }}
       run: ./pack.sh "$RULES_VERSION"
+    - name: Stage publishable packages
+      run: python scripts/prepare_publish.py
     - name: Upload packages
       uses: actions/upload-artifact@v4
       with:
         name: hapin-schemas-v${{ steps.version.outputs.number }}
-        path: data/*.schema-${{ steps.version.outputs.number }}.zip
+        path: dist/*.zip
         if-no-files-found: error
     - name: Publish GitHub Release
       if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch'
@@ -73,7 +75,7 @@ jobs:
         RULES_VERSION: ${{ steps.version.outputs.number }}
       shell: bash
       run: |
-        assets=(data/*.schema-"$RULES_VERSION".zip)
+        assets=(dist/*.schema-"$RULES_VERSION".zip)
         [[ "${#assets[@]}" == 3 ]] || { echo "Expected three schema packages" >&2; exit 1; }
         if gh release view "$RELEASE_TAG" > /dev/null 2>&1; then
           gh release upload "$RELEASE_TAG" "${assets[@]}" --clobber
@@ -83,3 +85,14 @@ jobs:
             --title "四叶草哈汉混合输入规则 $RELEASE_TAG" \
             --notes-file RELEASE_NOTES.md
         fi
+    - name: Publish packages to gh-pages
+      if: github.event_name != 'pull_request'
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_branch: gh-pages
+        publish_dir: ./dist
+        keep_files: false
+        force_orphan: false
+        user_name: Herbert He
+        user_email: Herbert.He0229@gmail.com

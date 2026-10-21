@@ -108,7 +108,8 @@ python -m pip install -r requirements.txt
 360 万中文词典及新增的三份词表已随源码保存，不需要从桌面重新复制。
 
 构建后，`cache/` 保存中间文件和 `vocabulary-report.json` 导入统计，
-`data/` 保存三个方案目录及打包后的 ZIP。
+`data/` 保存三个方案目录及打包后的 ZIP。`python3 scripts/prepare_publish.py`
+会把本版本的三个方案 ZIP 校验并复制到独立的 `dist/` 发布目录。
 
 `./build.sh [minfreq]` 的参数控制 360 万中文词库的最小词频，默认 `100`；
 数值越小，保留词条越多，安装包与部署开销也越大。`0` 表示不按此词频过滤。
@@ -128,15 +129,18 @@ python3 scripts/validate_packages.py data
 ## 自动构建与 Release
 
 [Build and Release Schema](.github/workflows/build.yml) 会执行词表测试、完整构建、
-librime 编译、安装包校验和打包。
+librime 编译、安装包校验和打包。发布前按固定文件名白名单将三个 ZIP 放入 `dist/`，
+Actions 构建产物、GitHub Release 和 gh-pages 均只读取该目录。
 
 - 推送 `master` 或提交到 `master` 的 PR：运行构建检查并上传 Actions 构建产物。
+- 非 PR 构建通过后：更新 gh-pages，只保留三个方案 ZIP 和部署标记 `.nojekyll`；不发布源码、子模块、缓存或整个项目目录。
 - 推送与 `VERSION` 一致的版本标签（当前为 `v2`）：检查通过后发布 GitHub Release。
 - 手动运行 workflow：按当前 `VERSION` 发布；已有 Release 时更新同名 ZIP 附件。
 
 发布新版本时，同步更新 `VERSION`、源方案和词典版本，以及 `RELEASE_NOTES.md`。
 标签与版本不一致时构建会失败。Release 附件是供客户端部署的源码词库包，
-不包含跨平台通用的预编译二进制词库。
+不包含跨平台通用的预编译二进制词库。GitHub Release 页面自动提供的 `Source code`
+是平台的源码下载入口，不属于 workflow 上传的发布附件。
 
 ## 来源与致谢
 
